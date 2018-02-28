@@ -1,4 +1,4 @@
-# Cas9-Web-Design-App
+# Cas9 Web Design App
 Building a web application to streamline the design of gRNAs for Cas9 genome editing.
 
 ## JBrowse
@@ -9,10 +9,12 @@ Download the reference sequence (ex. mm10.fa). Navigate to ```/var/www/jbrowse/`
 ```bash
 $ bin/prepare-refseqs.pl --fasta genome/mm10.fa
 ```
+N.B. Before proceeding to the next step, ensure that chromosome names in the .gff3 match chromosome names in the FASTA. For example, if the FASTA names chromosomes with "chr1" and the .gff3 names chromosomes with "1" only, the sequences will not appear in JBrowse.
+
 ### 2. Prepare information for specific tracks:
 Again, in ```/var/www/jbrowse/```, run ```bin/flatfile-to-json.pl``` to generate track-specific json. For example, to set up a Gene track to show genes:
 ```
-$ bin/flatfile-to-json.pl --tracklabel gene --key “Gene” --gff docs/tutorial/data_files/volvox.gff3 --cssclass feature2 --getLabel --type gene --autocomplete all
+$ bin/flatfile-to-json.pl --tracklabel gene --key "Gene" --gff genome/Mus_musculus_chr_name.GRCm38.91.gff3 --cssclass feature2 --getLabel --type gene --autocomplete all 
 ```
 ```--autocomplete all``` allows genes to be searched for by name in the search bar. 
 
@@ -21,4 +23,5 @@ For more details on parameter settings, see the [JBrowse paper at NCBI](https://
 ```
 $ bin/generate-names.pl
 ```
-#### Finally, to view updated information in the browser, navigate to the [site](https://crispor.ccm.sickkids.ca/jbrowse/index.html)
+#### Finally, to view updated information in the browser, navigate to your instance of JBrowse. 
+See the [CCM instance](https://crispor.ccm.sickkids.ca/jbrowse/index.html)
